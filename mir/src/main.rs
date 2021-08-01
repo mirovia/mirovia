@@ -42,16 +42,21 @@ fn watch(x: &WatchArgs) {
             RecursiveMode::Recursive,
         )
         .unwrap();
+    watch_callback();
     loop {
         match rx.recv() {
             Ok(_event) => {
-                if test_front() {
-                    build_front_wasm();
-                    release();
-                }
+                watch_callback()
             }
             Err(e) => println!("watch error: {:?}", e),
         }
+    }
+}
+fn watch_callback() {
+    if test_front() {
+        build_front_wasm();
+        release();
+        println!("Done");
     }
 }
 fn release() -> bool {
