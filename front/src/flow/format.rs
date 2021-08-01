@@ -103,12 +103,12 @@ pub fn format_flow_as_yaml(x: &str) -> String {
 fn test_format_flow() {
     let examples = vec!["000_hello_world", "001_hello_someone"];
     for example in examples {
-        let content = read_to_string(format!("examples/{}.gf", example))
+        let content = read_to_string(format!("static/examples/{}.gf", example))
             .expect("Something went wrong reading the file");
         let content_flat = read_to_string(format!("examples_flat/{}.gf", example))
             .expect("Something went wrong reading the file");
         write(
-            format!("examples/{}.gf.test", example),
+            format!("examples_test/{}.test.gf", example),
             format_flow(&content_flat),
         )
         .unwrap();
@@ -119,7 +119,7 @@ fn test_format_flow() {
 fn test_flatten() {
     let examples = vec!["000_hello_world", "001_hello_someone"];
     for example in examples {
-        let content = read_to_string(format!("examples/{}.gf", example))
+        let content = read_to_string(format!("static/examples/{}.gf", example))
             .expect("Something went wrong reading the file");
         let content_flat = read_to_string(format!("examples_flat/{}.gf", example))
             .expect("Something went wrong reading the file");
@@ -135,7 +135,7 @@ fn test_flatten() {
 fn test_format_flow_as_yaml() {
     let examples = vec!["000_hello_world", "001_hello_someone"];
     for example in examples {
-        let content = read_to_string(format!("examples/{}.gf", example))
+        let content = read_to_string(format!("static/examples/{}.gf", example))
             .expect("Something went wrong reading the file");
         let content_yaml = read_to_string(format!("examples_yaml/{}.yaml", example))
             .expect("Something went wrong reading the file");

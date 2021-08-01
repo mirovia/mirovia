@@ -65,7 +65,7 @@ fn release() -> bool {
             == 0
         {
             println!("[ok]    webpack");
-            return copy_release();
+            return delete_release();
         } else {
             println!("[error] webpack");
         }
@@ -74,11 +74,58 @@ fn release() -> bool {
     }
     return false;
 }
+fn delete_release() -> bool {
+    if let Ok(mut child) = Command::new("rm")
+        .arg("-r")
+        .arg("-f")
+        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs")
+        .spawn()
+    {
+        if child
+            .wait()
+            .expect("rm wasn't running")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]    rm");
+            return copy_release();
+        } else {
+            println!("[error] rm");
+        }
+    } else {
+        println!("rm didn't start");
+    }
+    return false;
+}
 fn copy_release() -> bool {
     if let Ok(mut child) = Command::new("cp")
         .arg("-R")
         .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/dist")
         .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs")
+        .spawn()
+    {
+        if child
+            .wait()
+            .expect("cp wasn't running")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]    cp");
+            return copy_404();
+        } else {
+            println!("[error] cp");
+        }
+    } else {
+        println!("cp didn't start");
+    }
+    return false;
+}
+fn copy_404() -> bool {
+    if let Ok(mut child) = Command::new("cp")
+        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs/index.html")
+        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs/404.html")
         .spawn()
     {
         if child

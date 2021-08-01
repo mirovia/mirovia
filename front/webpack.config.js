@@ -13,7 +13,14 @@ module.exports = {
   },
   mode: "development",
   plugins: [
-    new CopyWebpackPlugin(['index.html', 'favicon.svg', 'examples', 'index.css'])
+    new CopyWebpackPlugin([
+      'index.html',
+      'favicon.svg',
+      'static',
+      'index.css',
+      'index_dark.css',
+      'index_light.css'
+    ])
   ],
   devServer: {
     // reference: https://webpack.js.org/configuration/dev-server/#devserverhttps
