@@ -38,6 +38,7 @@ fn watch(x: &WatchArgs) {
     watcher_front
         .watch(
             "/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/Cargo.toml",
+            // docker run --rm --name gouttelettes -v /Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs:/usr/share/nginx/html:ro -p 8080:80 -v /Users/loicbourgois/github.com/gouttelettes/gouttelettes/nginx.conf:/etc/nginx/nginx.conf:ro nginx
             RecursiveMode::Recursive,
         )
         .unwrap();
@@ -46,6 +47,7 @@ fn watch(x: &WatchArgs) {
             Ok(_event) => {
                 if test_front() {
                     build_front_wasm();
+                    release();
                 }
             }
             Err(e) => println!("watch error: {:?}", e),

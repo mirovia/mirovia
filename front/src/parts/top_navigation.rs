@@ -18,7 +18,7 @@ pub fn add() -> Result<(), JsValue> {
     let icon: HtmlImageElement = document
         .create_element("img")?
         .dyn_into::<web_sys::HtmlImageElement>()?;
-    icon.set_src("favicon.svg");
+    icon.set_src("/favicon.svg");
     home_link.append_child(&icon)?;
     let home_link_text: HtmlSpanElement = document
         .create_element("span")?

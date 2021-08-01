@@ -2,6 +2,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require('path');
 const fs = require('fs');
 
+const ASSET_PATH = process.env.ASSET_PATH || '/';
+
 module.exports = {
   node: {
     fs: 'empty',
@@ -10,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bootstrap.js",
+    publicPath: ASSET_PATH,
   },
   mode: "development",
   plugins: [
