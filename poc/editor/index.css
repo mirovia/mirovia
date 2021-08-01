@@ -1,0 +1,103 @@
+* {
+  color: #08F;
+  background: #111;
+  font-family: monospace;
+  font-size: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+button {
+  border-style: none;
+  border: none;
+  background: #115;
+  padding: 0.5em;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #227;
+  color: #0BF;
+}
+
+.childs_wrapper {
+  padding-left: 1em;
+}
+
+.file {
+  color: #2AF;
+}
+
+.open_right {
+  transform: rotate(90deg);
+  fill: #08F;
+}
+
+#folders {
+  display: flex;
+}
+
+
+#editor_div {
+  flex-grow: 1;
+  display: flex;
+  height: 0;
+}
+
+
+#down_div {
+  display: flex;
+}
+
+
+#logs {
+  width: 100%;
+  height: 5em;
+  border: none;
+  border-top: 1px solid #333;
+}
+
+
+#file_content_div {
+  background: #002;
+}
+
+
+#left, #json_div, #network_div {
+  width: 0;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+
+#left {
+  display: flex;
+  flex-direction: column;
+}
+
+
+#folders_div, #file_content_textarea {
+  height: 0;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+
+#file_content_textarea, #file_content_textarea:focus {
+  white-space: nowrap;
+  border: none;
+  resize: none;
+  border-top: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+
+.modified {
+  color: #d3d337;
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Gouttelettes</title>
+    <link rel="stylesheet" type="text/css" href="index.css"/>
+  </head>
+  <body>
+    <div id="folders">
+      <button id="reload_folders_button">Reload folders</button>
+      <button id="add_folder_button">Add folder</button>
+      <button id="fullscreen_button">Fullscreen</button>
+      <button id="quit_fullscreen_button">Quit Fullscreen</button>
+      <svg xmlns="http://www.w3.org/2000/svg" height="48px" viewBox="0 0 24 24" width="48px" class="open_right"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg>
+    </div>
+    <div id="editor_div">
+      <div id="left">
+        <div id="folders_div"></div>
+        <div>
+          <button id="save_button">Save</button>
+          <span id="file_modified_span" class="modified"></span><span id="file_title_span"></span>
+        </div>
+        <textarea id="file_content_textarea" spellcheck="false"></textarea>
+      </div>
+      <div id="json_div"></div>
+      <div id="network_div"></div>
+    </div>
+    <div id="down_div">
+      <textarea id="logs"></textarea>
+    </div>
+    <noscript>This page contains webassembly and javascript content, please enable javascript in your browser.</noscript>
+    <script src="./bootstrap.js"></script>
+  </body>
+</html>

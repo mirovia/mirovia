@@ -1,0 +1,14 @@
+---
+display:
+  salutation:
+    title:
+      english: Greeting
+      french: Salutation
+function:
+  hello:
+    output:
+      english: Hello World!
+      french: Bonjour tout le monde !
+display_input: ~
+graph:
+  - function.hello -> display.salutation

@@ -1,0 +1,3 @@
+[submodule "dependencies/python-common"]
+	path = dependencies/python-common
+	url = git@github.com:loicbourgois/python-common.git

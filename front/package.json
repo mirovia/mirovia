@@ -1,0 +1,32 @@
+{
+  "name": "gouttelettes",
+  "version": "0.1.0",
+  "main": "index.js",
+  "bin": {
+    "create-wasm-app": ".bin/create-wasm-app.js"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [
+    "webassembly",
+    "wasm",
+    "rust",
+    "webpack"
+  ],
+  "devDependencies": {
+    "copy-webpack-plugin": "^5.0.0",
+    "hello-wasm-pack": "^0.1.0",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "gouttelettes_wasm": "file:pkg",
+    "idb-keyval": "^5.0.6",
+    "sockjs": "^0.3.21",
+    "uuid": "^3.4.0"
+  }
+}

@@ -1,0 +1,15 @@
+front/target
+**/*.rs.bk
+Cargo.lock
+bin/
+front/pkg/
+wasm-pack.log
+
+node_modules
+dist
+__pycache__
+front/localhost-key.pem
+front/localhost.pem
+data
+.DS_Store
+mir/target
