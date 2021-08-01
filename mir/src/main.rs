@@ -16,6 +16,8 @@ fn main() {
         format_code()
     } else if let Some(_) = matches.subcommand_matches("front") {
         run_front()
+    } else if let Some(_) = matches.subcommand_matches("release") {
+        release();
     }
 }
 struct WatchArgs {
@@ -50,6 +52,53 @@ fn watch(x: &WatchArgs) {
         }
     }
 }
+fn release() -> bool {
+    if let Ok(mut child) = Command::new("webpack")
+        .current_dir("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/")
+        .spawn()
+    {
+        if child
+            .wait()
+            .expect("webpack wasn't running")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]    webpack");
+            return copy_release();
+        } else {
+            println!("[error] webpack");
+        }
+    } else {
+        println!("webpack build didn't start");
+    }
+    return false;
+}
+fn copy_release() -> bool {
+    if let Ok(mut child) = Command::new("cp")
+        .arg("-R")
+        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/dist")
+        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs")
+        .spawn()
+    {
+        if child
+            .wait()
+            .expect("cp wasn't running")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]    cp");
+            return true;
+        } else {
+            println!("[error] cp");
+        }
+    } else {
+        println!("cp didn't start");
+    }
+    return false;
+}
+
 fn test_front() -> bool {
     if let Ok(mut child) = Command::new("cargo")
         .arg("test")

@@ -5,6 +5,8 @@ about: "Gouttelettes' command line interface"
 settings:
     - ArgRequiredElseHelp
 subcommands:
+    - release:
+        about: Release for github
     - format:
         about: Format code
     - front:

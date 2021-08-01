@@ -1,0 +1,338 @@
+/* Theme */
+* {
+  color: #0000;
+  background: #0000;
+}
+body {
+  background: #111;
+}
+
+
+/* Other */
+* {
+  font-family: monospace;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+#nav_div {
+  background: #ffa700;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+#nav_div > a:not(:last-child) {
+  margin-right: 0.5em;
+}
+#nav_div > a:not(:first-child) {
+  margin-left: 0.5em;
+}
+
+#nav_div img {
+  height: 2em;
+  padding: 0.5em;
+  transform: rotateX(180deg) rotate(190deg);
+  width: 2em;
+}
+#nav_div > a {
+  display: flex;
+  align-items: center;
+}
+
+#nav_div > a *, #nav_div > a {
+  color: #3838fd;
+}
+
+#nav_div > a:hover * , #nav_div > a:hover{
+  color: #fff;
+}
+
+#nav_div > a:hover img {
+  transform: rotateX(180deg) rotate(190deg);
+}
+
+#nav_div input {
+  border: 0px;
+  padding: 0.3em;
+  background: #50f4b7;
+  color: #0f189b;
+  margin: 0.2em;
+}
+
+#nav_div button {
+  border: 0px solid #8989c4;
+  padding: 0.3em;
+  margin: 0.5em;
+  margin-left: 0.2em;
+}
+
+#tool_div {
+  display: flex;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+button {
+  border-style: none;
+  border: none;
+  background: #115;
+  padding: 0.5em;
+}
+
+button:hover {
+  cursor: pointer;
+  background: #227;
+  color: #0BF;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #0BF;
+}
+
+.childs_wrapper {
+  padding-left: 1em;
+}
+
+.file {
+  color: #2AF;
+}
+
+.open_right {
+  transform: rotate(90deg);
+  fill: #08F;
+}
+
+#folders {
+  display: flex;
+}
+
+
+#editor_div {
+  flex-grow: 1;
+  display: flex;
+  height: 0;
+}
+
+
+#down_div {
+  display: flex;
+}
+
+
+#logs {
+  width: 100%;
+  height: 5em;
+  border: none;
+  border-top: 1px solid #333;
+}
+
+
+#file_content_div {
+  background: #002;
+}
+
+
+#left, #json_div, #network_div {
+  width: 0;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+
+#left {
+  display: flex;
+  flex-direction: column;
+}
+
+
+#folders_div, #file_content_textarea {
+  height: 0;
+  flex-grow: 1;
+  overflow: scroll;
+}
+
+
+#file_content_textarea, #file_content_textarea:focus {
+  white-space: nowrap;
+  border: none;
+  resize: none;
+  border-top: 1px solid #333;
+  border-right: 1px solid #333;
+}
+
+
+.modified {
+  color: #d3d337;
+}
+
+#body_home_page {
+
+}
+
+#home_page_forms_wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+#home_page_forms_wrapper > div:not(:last-child) {
+  margin-bottom: 2em;
+}
+
+#home_page_forms_wrapper > div > *:not(:last-child) {
+  margin-bottom: 0.5em;
+}
+
+#login_form {
+  display: flex;
+  flex-direction: column;
+  max-width: 20em;
+  margin: auto;
+}
+
+#home_page_forms_wrapper > div {
+  width: 100%;
+}
+
+input {
+  border: 1px solid #8989c4;
+  padding: 0.5em;
+}
+
+#middle {
+  flex-grow: 1;
+  display: flex;
+}
+
+#playground {
+  flex-grow: 3;
+}
+
+
+
+
+textarea {
+  border: none;
+  resize: none;
+}
+
+#playground {
+  display: flex;
+}
+#text_editor {
+  flex-grow: 1;
+  background: #8883;
+  display: flex;
+}
+#text_editor_textarea {
+  background: aquamarine;
+  flex-grow: 1;
+  width: 0;
+  white-space: pre;
+}
+#examples_list {
+ max-height: 3em;
+ overflow: scroll;
+}
+
+.playground_example_selecter {
+  cursor: pointer;
+}
+.playground_example_selecter:hover {
+  color: #3838fd;
+}
+
+
+#language_button_image {
+  height: 2.2em;
+  width: 3.3em;
+}
+#language_button {
+ padding: 0;
+ display: flex;
+}
+
+
+.visible_true {
+}
+.visible_false {
+  display: none;
+}
+
+
+#debug {
+  flex-direction: column;
+  width: 0;
+  flex-grow: 1.5;
+  background: #8883;
+}
+#debug.visible_true {
+  display: flex;
+}
+#debug.visible_false {
+  display: none;
+}
+#debug_textarea {
+  height: 5em;
+}
+#debug_div_logs{
+  flex-grow: 1;
+  white-space: pre;
+  height: 0;
+  overflow: scroll;
+  border-bottom: 2px solid #fff8;
+}
+
+
+
+#node_editor {
+  flex-grow: 2;
+  display: flex;
+  width: 0;
+  flex-direction: column;
+}
+
+
+.display {
+  width: max-content;
+}
+.display * {
+  color: #2525ff;
+}
+.display > h1 {
+  background: #79acff;
+}
+.display > p {
+  background: #B6D2FF;
+  padding: 2em;
+}
+
+
+.function {
+  width: max-content;
+}
+.function * {
+  color: #2525ff;
+}
+.function > .id {
+  background: #ffebae;
+}
+.function > .content {
+  background: #f9ffb6;
+  padding-left: 2em;
+}
