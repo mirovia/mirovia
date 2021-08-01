@@ -146,8 +146,8 @@ pub fn set_language(language: &str) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let flags: HashMap<String, String> = hashmap![
-        "fr".to_owned()=>"static/flags/flag-france.png".to_owned(),
-        "en".to_owned()=>"static/flags/flag-united-kingdom.png".to_owned()
+        "fr".to_owned()=>"flags/flag-france.png".to_owned(),
+        "en".to_owned()=>"flags/flag-united-kingdom.png".to_owned()
     ];
     match document.get_element_by_id("language_button_image") {
         Some(language_button_image_wrapper) => {
