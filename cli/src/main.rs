@@ -31,12 +31,12 @@ fn run(command_vec: &Vec<&str>, dir: &str) {
     println!("$ {} @ {}", command_vec.join(" "), dir);
     if let Ok(mut child) = command.spawn() {
         if child.wait().expect("command failed").code().unwrap() == 0 {
-            println!("  [ok]");
+            println!("[ok]");
         } else {
-            panic!("  [error]");
+            panic!("[error]");
         }
     } else {
-        println!("  [error] command failed");
+        println!("[error] command failed");
     }
 }
 fn push() {
