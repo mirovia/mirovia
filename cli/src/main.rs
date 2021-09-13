@@ -39,7 +39,7 @@ fn run(command_vec: &Vec<&str>, dir: &str) {
         {
             println!("  [ok]");
         } else {
-            println!("  [error]");
+            panic!("  [error]");
         }
     } else {
         println!("command failed");
