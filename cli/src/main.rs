@@ -28,8 +28,8 @@ fn run(command_vec: &Vec<&str>, dir: &str) {
         command.arg(command_vec[arg_i]);
     }
     command.current_dir(dir);
-    if let Ok(mut child) = command.spawn()
-    {
+    println!("$ {}", command_vec.join(" "));
+    if let Ok(mut child) = command.spawn() {
         if child
             .wait()
             .expect("command failed")
@@ -49,7 +49,7 @@ fn push() {
     let commands: Vec<Vec<&str>> = vec![
         vec!["git", "add", "."],
         vec!["git", "commit", "-m", "m push"],
-        //vec!["git", "push"]
+        vec!["git", "push"]
     ];
     println!("plop");
     for command in commands.iter() {
