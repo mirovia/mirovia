@@ -1,5 +1,5 @@
 {
-  "name": "gouttelettes",
+  "name": "mirovia",
   "version": "0.1.0",
   "main": "index.js",
   "bin": {
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "fs": "^0.0.1-security",
-    "gouttelettes_wasm": "file:pkg",
+    "mirovia_wasm": "file:pkg",
     "idb-keyval": "^5.0.6",
     "sockjs": "^0.3.21",
     "uuid": "^3.4.0"

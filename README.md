@@ -1,18 +1,18 @@
-# Gouttelettes
+# Mirovia
 
 *Ocean of solutions*
 
 ## Users
 
-Try Gouttelettes at **gouttelettes.com**.
+Try Mirovia at **mirovia.one**.
 
 ## Developers
 
 ```sh
-mkdir -p $HOME/github.com/gouttelettes/gouttelettes
-git clone git@github.com:gouttelettes/gouttelettes.git $HOME/github.com/gouttelettes/gouttelettes
-alias gcl="PYTHONPATH=$HOME/github.com/gouttelettes python3 -m gouttelettes"
-gcl start
+mkdir -p $HOME/github.com/mirovia/mirovia
+git clone git@github.com:mirovia/mirovia.git $HOME/github.com/mirovia/mirovia
+alias mcl="PYTHONPATH=$HOME/github.com/mirovia python3 -m mirovia"
+mcl start
 ```
 
 ### Setup

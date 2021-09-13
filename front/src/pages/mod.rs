@@ -6,7 +6,6 @@ pub mod not_found;
 pub mod playground;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
-//use crate::parts::debug::load_debug_visibility;
 pub fn build(content: Result<web_sys::HtmlDivElement, JsValue>) -> Result<(), JsValue> {
     parts::top::add()?;
     let window = web_sys::window().expect("no global `window` exists");
@@ -18,7 +17,10 @@ pub fn build(content: Result<web_sys::HtmlDivElement, JsValue>) -> Result<(), Js
         .create_element("div")?
         .dyn_into::<web_sys::HtmlDivElement>()?;
     middle_div.set_id("middle");
-    let content_div = content.unwrap();
+    let content_div = match content {
+        Ok(x) => x,
+        Err(e) => panic!("{:?}", e),
+    };
     middle_div.append_child(&content_div)?;
     middle_div.append_child(&debug_div)?;
     body.append_child(&middle_div)?;

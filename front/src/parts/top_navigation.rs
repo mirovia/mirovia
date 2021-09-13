@@ -18,12 +18,12 @@ pub fn add() -> Result<(), JsValue> {
     let icon: HtmlImageElement = document
         .create_element("img")?
         .dyn_into::<web_sys::HtmlImageElement>()?;
-    icon.set_src("favicon.svg");
+    icon.set_src("/favicon.svg");
     home_link.append_child(&icon)?;
     let home_link_text: HtmlSpanElement = document
         .create_element("span")?
         .dyn_into::<web_sys::HtmlSpanElement>()?;
-    home_link_text.set_inner_text("Gouttelettes");
+    home_link_text.set_inner_text("Mirovia");
     home_link.append_child(&home_link_text)?;
     nav_div.append_child(&home_link)?;
     let playground_link: HtmlAnchorElement = document

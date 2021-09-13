@@ -113,23 +113,12 @@ pub fn switch_language_button() -> Result<HtmlButtonElement, JsValue> {
     let img = document
         .create_element("img")?
         .dyn_into::<HtmlImageElement>()?;
-    img.set_src("static/flags/flag-france.png");
+    img.set_src("/flags/flag-france.png");
     img.set_id("language_button_image");
-    switch_language_button.append_child(&img);
+    switch_language_button.append_child(&img)?;
     return Ok(switch_language_button);
 }
 pub fn switch_language() {
-    // let window = web_sys::window().expect("no global `window` exists");
-    // let document = window.document().expect("should have a document on window");
-    // let language: HtmlButtonElement = document
-    //     .get_element_by_id("language_button")
-    //     .unwrap()
-    //     .dyn_into::<web_sys::HtmlButtonElement>()
-    //     .unwrap();
-    // let theme_cycling: HashMap<String, String> = hashmap![
-    //     "static/flags/flag-france.png".to_owned()=>"static/flags/flag-united-kingdom.png".to_owned(),
-    //     "static/flags/flag-united-kingdom.png".to_owned()=>"static/flags/flag-france.png".to_owned()
-    // ];
     let language_cycling: HashMap<String, String> = hashmap![
         "fr".to_owned()=>"en".to_owned(),
         "en".to_owned()=>"fr".to_owned()
@@ -137,17 +126,17 @@ pub fn switch_language() {
     let new_language = &language_cycling[&get_language()];
     set_language(new_language);
 }
-struct Language {
-    key: String,
-    long: String,
-    flag: String,
-}
+// struct Language {
+//     key: String,
+//     long: String,
+//     flag: String,
+// }
 pub fn set_language(language: &str) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
     let flags: HashMap<String, String> = hashmap![
-        "fr".to_owned()=>"static/flags/flag-france.png".to_owned(),
-        "en".to_owned()=>"static/flags/flag-united-kingdom.png".to_owned()
+        "fr".to_owned()=>"/flags/flag-france.png".to_owned(),
+        "en".to_owned()=>"/flags/flag-united-kingdom.png".to_owned()
     ];
     match document.get_element_by_id("language_button_image") {
         Some(language_button_image_wrapper) => {
@@ -175,7 +164,8 @@ pub fn get_language_full() -> String {
     return hashmap![
         "fr".to_owned()=>"french".to_owned(),
         "en".to_owned()=>"english".to_owned()
-    ][&get_language()].to_string();
+    ][&get_language()]
+        .to_string();
 }
 pub fn load_language() {
     set_language(&get_language());

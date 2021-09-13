@@ -1,10 +1,10 @@
 [package]
-name = "gouttelettes-front"
+name = "mirovia-front"
 version = "0.1.0"
 authors = ["loicbourgois"]
 edition = "2018"
-description = "Gouttelettes' frontend"
-repository = "https://github.com/gouttelettes/gouttelettes"
+description = "mirovia' frontend"
+repository = "https://github.com/mirovia/mirovia"
 license = "GPL-3.0"
 
 [lib]
@@ -61,6 +61,7 @@ features = [
   'Node',
   'Window',
   'RequestMode',
+  'History',
 ]
 
 
