@@ -37,9 +37,9 @@ fn run(command_vec: &Vec<&str>, dir: &str) {
             .unwrap()
             == 0
         {
-            println!("[ok]");
+            println!("  [ok]");
         } else {
-            println!("[error]");
+            println!("  [error]");
         }
     } else {
         println!("command failed");
