@@ -164,7 +164,8 @@ pub fn get_language_full() -> String {
     return hashmap![
         "fr".to_owned()=>"french".to_owned(),
         "en".to_owned()=>"english".to_owned()
-    ][&get_language()].to_string();
+    ][&get_language()]
+        .to_string();
 }
 pub fn load_language() {
     set_language(&get_language());

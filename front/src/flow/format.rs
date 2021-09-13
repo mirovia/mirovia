@@ -1,11 +1,11 @@
 use crate::flow::code::MiroviaFlow;
-use std::collections::HashSet;
-use std::iter::repeat;
 use crate::log;
+use std::collections::HashSet;
 #[cfg(test)]
 use std::fs::read_to_string;
 #[cfg(test)]
 use std::fs::write;
+use std::iter::repeat;
 fn format_flow(x: &str) -> String {
     let mut reset_indent = HashSet::new();
     reset_indent.insert("display");

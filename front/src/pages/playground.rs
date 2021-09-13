@@ -3,6 +3,7 @@
 use crate::flow::code::flow_code;
 //use crate::flow::code::MiroviaFlow;
 use crate::log;
+use crate::parts::top_tools::get_language_full;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::JsCast;
 use wasm_bindgen::JsValue;
@@ -12,7 +13,6 @@ use web_sys::HtmlTextAreaElement;
 use web_sys::Request;
 use web_sys::RequestInit;
 use web_sys::Response;
- use crate::parts::top_tools::get_language_full;
 struct Example<'a> {
     title: &'a str,
     content: String,
@@ -77,10 +77,11 @@ pub async fn build(example_id: usize) -> Result<web_sys::HtmlDivElement, JsValue
     for example in examples.iter() {
         let example_selecter = match document
             .create_element("p")?
-            .dyn_into::<web_sys::HtmlParagraphElement>() {
-                Ok(x)=>x,
-                Err(e) => panic!("{} {} {:?}", file!(), line!(), e)
-            };
+            .dyn_into::<web_sys::HtmlParagraphElement>()
+        {
+            Ok(x) => x,
+            Err(e) => panic!("{} {} {:?}", file!(), line!(), e),
+        };
         example_selecter.set_inner_text(&format!("- {}", example.title));
         example_selecter.set_id(&format!("example-{}", example.title));
         example_selecter
@@ -112,7 +113,11 @@ pub async fn build(example_id: usize) -> Result<web_sys::HtmlDivElement, JsValue
         .dyn_into::<HtmlDivElement>()?;
     node_editor_div.set_id("node_editor");
     playground_div.append_child(&node_editor_div)?;
-    open_example_inner(text_editor_textarea, node_editor_div, &examples[example_id].content)?;
+    open_example_inner(
+        text_editor_textarea,
+        node_editor_div,
+        &examples[example_id].content,
+    )?;
     Ok(playground_div)
 }
 fn open_example_inner(
@@ -238,7 +243,11 @@ fn open_example(example_content: &String, example_id: &str) {
     let title: &str = "";
     let url = format!("/playground/{}", example_id);
     let url_wrapped: Option<&str> = Some(&url);
-    window.history().unwrap().push_state_with_url(data, title, url_wrapped).unwrap();
+    window
+        .history()
+        .unwrap()
+        .push_state_with_url(data, title, url_wrapped)
+        .unwrap();
 }
 pub async fn fetch_example(url: &str) -> Result<String, JsValue> {
     let opts = RequestInit::new();

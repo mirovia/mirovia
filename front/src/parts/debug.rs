@@ -57,7 +57,7 @@ pub fn build() -> Result<web_sys::HtmlDivElement, JsValue> {
 fn print_local_storage() {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
-    let debug_div_logs:HtmlDivElement = document
+    let debug_div_logs: HtmlDivElement = document
         .get_element_by_id("debug_div_logs")
         .unwrap()
         .dyn_into::<HtmlDivElement>()
@@ -67,7 +67,9 @@ fn print_local_storage() {
     for i in 0..storage.length().unwrap() {
         let key = &storage.key(i).unwrap().unwrap();
         let value = storage.get_item(key).unwrap().unwrap();
-        debug_div_logs.set_inner_text(&(debug_div_logs.inner_text() + &format!("  {}: {}",key,value) + "\n"));
+        debug_div_logs.set_inner_text(
+            &(debug_div_logs.inner_text() + &format!("  {}: {}", key, value) + "\n"),
+        );
     }
 
     debug_div_logs.set_scroll_top(debug_div_logs.scroll_height());

@@ -51,30 +51,9 @@ fn push() {
         vec!["git", "commit", "-m", "m push"],
         vec!["git", "push"]
     ];
-    println!("plop");
     for command in commands.iter() {
         run(command, "/Users/loicbourgois/github.com/mirovia/mirovia/")
     }
-    // if let Ok(mut child) = Command::new("npm")
-    //     .arg("install")
-    //     .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/")
-    //     .spawn()
-    // {
-    //     if child
-    //         .wait()
-    //         .expect("npm wasn't running")
-    //         .code()
-    //         .unwrap()
-    //         == 0
-    //     {
-    //         println!("[ok]    npm install");
-    //     } else {
-    //         println!("[error] npm install");
-    //     }
-    // } else {
-    //     println!("npm didn't start");
-    // }
-    // return false;
 }
 struct WatchArgs {
     verbose: bool,
@@ -298,23 +277,34 @@ fn build_front_wasm() {
         println!("wasm-pack build didn't start");
     }
 }
-fn format_code() {
-    for name in ["front", "mir"] {
-        let command_name_1 = format!("cargo fmt {}", name);
-        if let Ok(mut child) = Command::new("cargo")
-            .arg("fmt")
-            .current_dir(format!(
-                "/Users/loicbourgois/github.com/mirovia/mirovia/{}",
-                name
-            ))
-            .spawn()
-        {
-            child
-                .wait()
-                .expect(format!("{} wasn't running", command_name_1).as_str());
-            println!("[ok] {}", command_name_1);
-        } else {
-            println!("{} didn't start", command_name_1);
-        }
+fn run_commands(path: &str, commands: Vec<Vec<&str>>) {
+    for command in commands.iter() {
+        run(command, path)
     }
+}
+fn format_code() {
+    run_commands("/Users/loicbourgois/github.com/mirovia/mirovia/",
+    vec![
+        vec!["git", "add", "."],
+        vec!["git", "commit", "-m", "m push"],
+        vec!["git", "push"]
+    ]);
+    // for name in ["front", "mir"] {
+    //     let command_name_1 = format!("cargo fmt {}", name);
+    //     if let Ok(mut child) = Command::new("cargo")
+    //         .arg("fmt")
+    //         .current_dir(format!(
+    //             "/Users/loicbourgois/github.com/mirovia/mirovia/{}",
+    //             name
+    //         ))
+    //         .spawn()
+    //     {
+    //         child
+    //             .wait()
+    //             .expect(format!("{} wasn't running", command_name_1).as_str());
+    //         println!("[ok] {}", command_name_1);
+    //     } else {
+    //         println!("{} didn't start", command_name_1);
+    //     }
+    // }
 }

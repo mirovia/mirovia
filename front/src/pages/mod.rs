@@ -19,7 +19,7 @@ pub fn build(content: Result<web_sys::HtmlDivElement, JsValue>) -> Result<(), Js
     middle_div.set_id("middle");
     let content_div = match content {
         Ok(x) => x,
-        Err(e) => panic!("{:?}", e)
+        Err(e) => panic!("{:?}", e),
     };
     middle_div.append_child(&content_div)?;
     middle_div.append_child(&debug_div)?;

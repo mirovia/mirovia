@@ -6,7 +6,7 @@ use std::collections::BTreeMap;
 pub struct MiroviaFlow {
     pub display: BTreeMap<String, DisplayDefinition>,
     pub function: BTreeMap<String, FunctionDefinition>,
-    pub display_input: Option<BTreeMap<String, DisplayInputDefinition>> ,
+    pub display_input: Option<BTreeMap<String, DisplayInputDefinition>>,
     graph: Vec<String>,
 }
 #[derive(Debug, PartialEq, Serialize, Deserialize)]
