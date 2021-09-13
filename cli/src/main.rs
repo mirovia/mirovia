@@ -28,32 +28,26 @@ fn run(command_vec: &Vec<&str>, dir: &str) {
         command.arg(command_vec[arg_i]);
     }
     command.current_dir(dir);
-    println!("$ {}", command_vec.join(" "));
+    println!("$ {} @ {}", command_vec.join(" "), dir);
     if let Ok(mut child) = command.spawn() {
-        if child
-            .wait()
-            .expect("command failed")
-            .code()
-            .unwrap()
-            == 0
-        {
+        if child.wait().expect("command failed").code().unwrap() == 0 {
             println!("  [ok]");
         } else {
             panic!("  [error]");
         }
     } else {
-        println!("command failed");
+        println!("  [error] command failed");
     }
 }
 fn push() {
-    let commands: Vec<Vec<&str>> = vec![
-        vec!["git", "add", "."],
-        vec!["git", "commit", "-m", "m push"],
-        vec!["git", "push"]
-    ];
-    for command in commands.iter() {
-        run(command, "/Users/loicbourgois/github.com/mirovia/mirovia/")
-    }
+    run_commands(
+        "/Users/loicbourgois/github.com/mirovia/mirovia/",
+        vec![
+            vec!["git", "add", "."],
+            vec!["git", "commit", "-m", "m push"],
+            vec!["git", "push"],
+        ],
+    );
 }
 struct WatchArgs {
     verbose: bool,
@@ -80,9 +74,7 @@ fn watch(x: &WatchArgs) {
     watch_callback();
     loop {
         match rx.recv() {
-            Ok(_event) => {
-                watch_callback()
-            }
+            Ok(_event) => watch_callback(),
             Err(e) => println!("watch error: {:?}", e),
         }
     }
@@ -101,13 +93,7 @@ fn npm_install() -> bool {
         .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
         .spawn()
     {
-        if child
-            .wait()
-            .expect("npm wasn't running")
-            .code()
-            .unwrap()
-            == 0
-        {
+        if child.wait().expect("npm wasn't running").code().unwrap() == 0 {
             println!("[ok]    npm install");
             return delete_release();
         } else {
@@ -147,13 +133,7 @@ fn delete_release() -> bool {
         .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs")
         .spawn()
     {
-        if child
-            .wait()
-            .expect("rm wasn't running")
-            .code()
-            .unwrap()
-            == 0
-        {
+        if child.wait().expect("rm wasn't running").code().unwrap() == 0 {
             println!("[ok]    rm");
             return copy_release();
         } else {
@@ -171,13 +151,7 @@ fn copy_release() -> bool {
         .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs")
         .spawn()
     {
-        if child
-            .wait()
-            .expect("cp wasn't running")
-            .code()
-            .unwrap()
-            == 0
-        {
+        if child.wait().expect("cp wasn't running").code().unwrap() == 0 {
             println!("[ok]    cp");
             return copy_404();
         } else {
@@ -194,13 +168,7 @@ fn copy_404() -> bool {
         .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs/404.html")
         .spawn()
     {
-        if child
-            .wait()
-            .expect("cp wasn't running")
-            .code()
-            .unwrap()
-            == 0
-        {
+        if child.wait().expect("cp wasn't running").code().unwrap() == 0 {
             println!("[ok]    cp");
             return true;
         } else {
@@ -282,29 +250,17 @@ fn run_commands(path: &str, commands: Vec<Vec<&str>>) {
         run(command, path)
     }
 }
+fn run_command_at(command: Vec<&str>, paths: Vec<&str>) {
+    for path in paths.iter() {
+        run(&command, path)
+    }
+}
 fn format_code() {
-    run_commands("/Users/loicbourgois/github.com/mirovia/mirovia/",
-    vec![
-        vec!["git", "add", "."],
-        vec!["git", "commit", "-m", "m push"],
-        vec!["git", "push"]
-    ]);
-    // for name in ["front", "mir"] {
-    //     let command_name_1 = format!("cargo fmt {}", name);
-    //     if let Ok(mut child) = Command::new("cargo")
-    //         .arg("fmt")
-    //         .current_dir(format!(
-    //             "/Users/loicbourgois/github.com/mirovia/mirovia/{}",
-    //             name
-    //         ))
-    //         .spawn()
-    //     {
-    //         child
-    //             .wait()
-    //             .expect(format!("{} wasn't running", command_name_1).as_str());
-    //         println!("[ok] {}", command_name_1);
-    //     } else {
-    //         println!("{} didn't start", command_name_1);
-    //     }
-    // }
+    run_command_at(
+        vec!["cargo", "fmt"],
+        vec![
+            "/Users/loicbourgois/github.com/mirovia/mirovia/front",
+            "/Users/loicbourgois/github.com/mirovia/mirovia/cli",
+        ],
+    );
 }
