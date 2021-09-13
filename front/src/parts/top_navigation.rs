@@ -23,7 +23,7 @@ pub fn add() -> Result<(), JsValue> {
     let home_link_text: HtmlSpanElement = document
         .create_element("span")?
         .dyn_into::<web_sys::HtmlSpanElement>()?;
-    home_link_text.set_inner_text("Gouttelettes");
+    home_link_text.set_inner_text("Mirovia");
     home_link.append_child(&home_link_text)?;
     nav_div.append_child(&home_link)?;
     let playground_link: HtmlAnchorElement = document

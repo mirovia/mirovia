@@ -20,7 +20,7 @@ pub fn build() -> Result<web_sys::HtmlDivElement, JsValue> {
         .create_element("div")?
         .dyn_into::<HtmlDivElement>()?;
     debug_div_top.set_id("debug_div_top");
-    debug_div.append_child(&debug_div_top);
+    debug_div.append_child(&debug_div_top)?;
     // Show local storage
     let local_storage_button = document
         .create_element("button")?
@@ -32,25 +32,25 @@ pub fn build() -> Result<web_sys::HtmlDivElement, JsValue> {
     local_storage_button.set_onclick(Some(local_storage_button_onclick.as_ref().unchecked_ref()));
     // TODO: do not use forget
     local_storage_button_onclick.forget();
-    debug_div_top.append_child(&local_storage_button);
+    debug_div_top.append_child(&local_storage_button)?;
     //
     let test_debug_button = document
         .create_element("button")?
         .dyn_into::<HtmlButtonElement>()?;
-    debug_div_top.append_child(&test_debug_button);
+    debug_div_top.append_child(&test_debug_button)?;
     test_debug_button.set_inner_text("Test");
     //
     let debug_div_logs = document
         .create_element("div")?
         .dyn_into::<HtmlDivElement>()?;
     debug_div_logs.set_id("debug_div_logs");
-    debug_div.append_child(&debug_div_logs);
+    debug_div.append_child(&debug_div_logs)?;
     // textarea
     let debug_textarea = document
         .create_element("textarea")?
         .dyn_into::<HtmlTextAreaElement>()?;
     debug_textarea.set_id("debug_textarea");
-    debug_div.append_child(&debug_textarea);
+    debug_div.append_child(&debug_textarea)?;
     load_debug_visibility(&debug_div);
     Ok(debug_div)
 }

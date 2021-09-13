@@ -11,7 +11,7 @@ use wasm_bindgen::JsValue;
 use web_sys::Window;
 #[wasm_bindgen]
 pub async fn go() -> Result<(), JsValue> {
-    log("Gouttelettes frontend running");
+    log("Mirovia frontend running");
     set_panic_hook();
     load_theme();
     let window: Window = web_sys::window().expect("no global `window` exists");
@@ -22,9 +22,13 @@ pub async fn go() -> Result<(), JsValue> {
         "/" => pages::home::go(),
         "/enter" => pages::enter::go(),
         "/forgot" => pages::forgot_credentials::go(),
-        "/playground" => pages::build(pages::playground::build().await),
+        "/playground" => pages::build(pages::playground::build(0).await),
+        "/playground/hello" => pages::build(pages::playground::build(0).await),
+        "/playground/hello-someone" => pages::build(pages::playground::build(1).await),
+        // "/playground/hello-someone" => pages::home::go(),
         _ => pages::not_found::go(),
-    };
+    }?;
+    log("donee");
     load_language();
     Ok(())
 }

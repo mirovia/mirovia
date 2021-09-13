@@ -1,7 +1,7 @@
 name: Make It Rain
 version: "0.1.0"
 author: Loïc Bourgois <loic@bourgois.pro>
-about: "Gouttelettes' command line interface"
+about: "Mirovia Command Line Interface"
 settings:
     - ArgRequiredElseHelp
 subcommands:
@@ -11,6 +11,8 @@ subcommands:
         about: Format code
     - front:
         about: Alias to npm start
+    - push:
+        about: Add, commit and push changes to github 
     - watch:
         about: Watch for file changes
         args:

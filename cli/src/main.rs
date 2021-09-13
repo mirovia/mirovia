@@ -18,7 +18,63 @@ fn main() {
         run_front()
     } else if let Some(_) = matches.subcommand_matches("release") {
         release();
+    } else if let Some(_) = matches.subcommand_matches("push") {
+        push();
     }
+}
+fn run(command_vec: &Vec<&str>, dir: &str) {
+    let mut command = Command::new(command_vec[0]);
+    for arg_i in 1..command_vec.len() {
+        command.arg(command_vec[arg_i]);
+    }
+    command.current_dir(dir);
+    if let Ok(mut child) = command.spawn()
+    {
+        if child
+            .wait()
+            .expect("command failed")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]");
+        } else {
+            println!("[error]");
+        }
+    } else {
+        println!("command failed");
+    }
+}
+fn push() {
+    let commands: Vec<Vec<&str>> = vec![
+        vec!["git", "add", "."],
+        vec!["git", "commit", "-m", "m push"],
+        //vec!["git", "push"]
+    ];
+    println!("plop");
+    for command in commands.iter() {
+        run(command, "/Users/loicbourgois/github.com/mirovia/mirovia/")
+    }
+    // if let Ok(mut child) = Command::new("npm")
+    //     .arg("install")
+    //     .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/")
+    //     .spawn()
+    // {
+    //     if child
+    //         .wait()
+    //         .expect("npm wasn't running")
+    //         .code()
+    //         .unwrap()
+    //         == 0
+    //     {
+    //         println!("[ok]    npm install");
+    //     } else {
+    //         println!("[error] npm install");
+    //     }
+    // } else {
+    //     println!("npm didn't start");
+    // }
+    // return false;
 }
 struct WatchArgs {
     verbose: bool,
@@ -31,14 +87,14 @@ fn watch(x: &WatchArgs) {
     let mut watcher_front = watcher(tx, Duration::from_secs(1)).unwrap();
     watcher_front
         .watch(
-            "/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/src",
+            "/Users/loicbourgois/github.com/mirovia/mirovia/front/src",
             RecursiveMode::Recursive,
         )
         .unwrap();
     watcher_front
         .watch(
-            "/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/Cargo.toml",
-            // docker run --rm --name gouttelettes -v /Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs:/usr/share/nginx/html:ro -p 8080:80 -v /Users/loicbourgois/github.com/gouttelettes/gouttelettes/nginx.conf:/etc/nginx/nginx.conf:ro nginx
+            "/Users/loicbourgois/github.com/mirovia/mirovia/front/Cargo.toml",
+            // docker run --rm --name mirovia -v /Users/loicbourgois/github.com/mirovia/mirovia/docs:/usr/share/nginx/html:ro -p 8080:80 -v /Users/loicbourgois/github.com/mirovia/mirovia/nginx.conf:/etc/nginx/nginx.conf:ro nginx
             RecursiveMode::Recursive,
         )
         .unwrap();
@@ -54,14 +110,38 @@ fn watch(x: &WatchArgs) {
 }
 fn watch_callback() {
     if test_front() {
+        npm_install();
         build_front_wasm();
         release();
         println!("Done");
     }
 }
+fn npm_install() -> bool {
+    if let Ok(mut child) = Command::new("npm")
+        .arg("install")
+        .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
+        .spawn()
+    {
+        if child
+            .wait()
+            .expect("npm wasn't running")
+            .code()
+            .unwrap()
+            == 0
+        {
+            println!("[ok]    npm install");
+            return delete_release();
+        } else {
+            println!("[error] npm install");
+        }
+    } else {
+        println!("npm didn't start");
+    }
+    return false;
+}
 fn release() -> bool {
     if let Ok(mut child) = Command::new("webpack")
-        .current_dir("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/")
+        .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
         .spawn()
     {
         if child
@@ -85,7 +165,7 @@ fn delete_release() -> bool {
     if let Ok(mut child) = Command::new("rm")
         .arg("-r")
         .arg("-f")
-        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs")
+        .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs")
         .spawn()
     {
         if child
@@ -108,8 +188,8 @@ fn delete_release() -> bool {
 fn copy_release() -> bool {
     if let Ok(mut child) = Command::new("cp")
         .arg("-R")
-        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/dist")
-        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs")
+        .arg("/Users/loicbourgois/github.com/mirovia/mirovia/front/dist")
+        .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs")
         .spawn()
     {
         if child
@@ -131,8 +211,8 @@ fn copy_release() -> bool {
 }
 fn copy_404() -> bool {
     if let Ok(mut child) = Command::new("cp")
-        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs/index.html")
-        .arg("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/docs/404.html")
+        .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs/index.html")
+        .arg("/Users/loicbourgois/github.com/mirovia/mirovia/docs/404.html")
         .spawn()
     {
         if child
@@ -156,7 +236,7 @@ fn copy_404() -> bool {
 fn test_front() -> bool {
     if let Ok(mut child) = Command::new("cargo")
         .arg("test")
-        .current_dir("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/")
+        .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
         .spawn()
     {
         if child
@@ -179,7 +259,7 @@ fn test_front() -> bool {
 fn run_front() {
     if let Ok(mut child) = Command::new("npm")
         .arg("start")
-        .current_dir("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/")
+        .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
         .spawn()
     {
         if child
@@ -200,7 +280,7 @@ fn run_front() {
 fn build_front_wasm() {
     if let Ok(mut child) = Command::new("wasm-pack")
         .arg("build")
-        .current_dir("/Users/loicbourgois/github.com/gouttelettes/gouttelettes/front/")
+        .current_dir("/Users/loicbourgois/github.com/mirovia/mirovia/front/")
         .spawn()
     {
         if child
@@ -224,7 +304,7 @@ fn format_code() {
         if let Ok(mut child) = Command::new("cargo")
             .arg("fmt")
             .current_dir(format!(
-                "/Users/loicbourgois/github.com/gouttelettes/gouttelettes/{}",
+                "/Users/loicbourgois/github.com/mirovia/mirovia/{}",
                 name
             ))
             .spawn()

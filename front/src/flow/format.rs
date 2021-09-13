@@ -1,12 +1,11 @@
-use crate::flow::code::GouttelettesFlow;
-use serde::Deserialize;
-use serde::Serialize;
-use std::collections::BTreeMap;
-use std::collections::HashMap;
+use crate::flow::code::MiroviaFlow;
 use std::collections::HashSet;
-use std::fs::read_to_string;
-use std::fs::write;
 use std::iter::repeat;
+use crate::log;
+#[cfg(test)]
+use std::fs::read_to_string;
+#[cfg(test)]
+use std::fs::write;
 fn format_flow(x: &str) -> String {
     let mut reset_indent = HashSet::new();
     reset_indent.insert("display");
@@ -95,7 +94,13 @@ pub fn format_flow_as_yaml(x: &str) -> String {
     let first_pass: String = new_lines
         .into_iter()
         .fold(String::new(), |a, b| a + &b + "\n");
-    let code: GouttelettesFlow = serde_yaml::from_str::<GouttelettesFlow>(&first_pass).unwrap();
+    let code: MiroviaFlow = match serde_yaml::from_str::<MiroviaFlow>(&first_pass) {
+        Ok(x) => x,
+        Err(e) => {
+            log(&format!("first_pass: {}", &first_pass));
+            panic!("error: {}", e)
+        }
+    };
     let second_pass = serde_yaml::to_string(&code).unwrap();
     return second_pass;
 }

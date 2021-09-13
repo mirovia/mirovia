@@ -248,6 +248,8 @@ textarea {
 #examples_list {
  max-height: 3em;
  overflow: scroll;
+ display: flex;
+ flex-direction: column;
 }
 
 .playground_example_selecter {

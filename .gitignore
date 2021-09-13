@@ -12,4 +12,4 @@ front/localhost-key.pem
 front/localhost.pem
 data
 .DS_Store
-mir/target
+cli/target

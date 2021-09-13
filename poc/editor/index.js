@@ -1,5 +1,5 @@
 const uuid = require('uuid');
-import * as gw from "gouttelettes_wasm";
+import * as gw from "mirovia_wasm";
 import * as idb from 'idb-keyval';
 
 

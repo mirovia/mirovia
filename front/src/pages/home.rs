@@ -15,7 +15,7 @@ pub fn go() -> Result<(), JsValue> {
     // let title = document
     //     .create_element("h1")?
     //     .dyn_into::<web_sys::HtmlHeadingElement>()?;
-    // title.set_text_content(Some("Gouttelettes"));
+    // title.set_text_content(Some("Mirovia"));
     // body.append_child(&title)?;
     let p_open = document
         .create_element("p")?

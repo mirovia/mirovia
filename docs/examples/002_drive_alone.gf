@@ -1,8 +1,8 @@
 ###########
 # Imports #
 ###########
-com.gouttelettes.types.date
-com.gouttelettes.functions.today
+com.mirovia.types.date
+com.mirovia.functions.today
 
 
 #########

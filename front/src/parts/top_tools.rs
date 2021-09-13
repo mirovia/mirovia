@@ -115,7 +115,7 @@ pub fn switch_language_button() -> Result<HtmlButtonElement, JsValue> {
         .dyn_into::<HtmlImageElement>()?;
     img.set_src("/flags/flag-france.png");
     img.set_id("language_button_image");
-    switch_language_button.append_child(&img);
+    switch_language_button.append_child(&img)?;
     return Ok(switch_language_button);
 }
 pub fn switch_language() {
@@ -126,11 +126,11 @@ pub fn switch_language() {
     let new_language = &language_cycling[&get_language()];
     set_language(new_language);
 }
-struct Language {
-    key: String,
-    long: String,
-    flag: String,
-}
+// struct Language {
+//     key: String,
+//     long: String,
+//     flag: String,
+// }
 pub fn set_language(language: &str) {
     let window = web_sys::window().expect("no global `window` exists");
     let document = window.document().expect("should have a document on window");
